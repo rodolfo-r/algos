@@ -1,7 +1,7 @@
 package sort
 
 import (
-	"github.com/techmexdev/algos/queue"
+	"github.com/rodolfo-r/datastructures/container/queue/doublyqueue"
 )
 
 // Merge applies merge sort to nums.
@@ -20,7 +20,7 @@ func merge(nums []int, start, end int) {
 }
 
 func mergeSorted(nums []int, start, mid, end int) {
-	q, q2 := queue.New(), queue.New()
+	q, q2 := doublyqueue.New(), doublyqueue.New()
 	for i := start; i <= mid; i++ {
 		q.Enqueue(nums[i])
 	}
@@ -31,39 +31,39 @@ func mergeSorted(nums []int, start, mid, end int) {
 
 	i := start
 	for !(q.Size() == 0) && !(q2.Size() == 0) {
-		if q.Front() < q2.Front() {
-			n, err := q.Dequeue()
-			if err != nil {
+		if q.Front().(int) < q2.Front().(int) {
+			n, ok := q.Dequeue()
+			if !ok {
 				break
 			}
 
-			nums[i], i = n, i+1
+			nums[i], i = n.(int), i+1
 
 		} else {
-			n, err := q2.Dequeue()
-			if err != nil {
+			n, ok := q2.Dequeue()
+			if !ok {
 				break
 			}
 
-			nums[i], i = n, i+1
+			nums[i], i = n.(int), i+1
 		}
 	}
 
 	for q.Size() > 0 {
-		n, err := q.Dequeue()
-		if err != nil {
+		n, ok := q.Dequeue()
+		if !ok {
 			break
 		}
 
-		nums[i], i = n, i+1
+		nums[i], i = n.(int), i+1
 	}
 
 	for q2.Size() > 0 {
-		n, err := q2.Dequeue()
-		if err != nil {
+		n, ok := q2.Dequeue()
+		if !ok {
 			break
 		}
 
-		nums[i], i = n, i+1
+		nums[i], i = n.(int), i+1
 	}
 }

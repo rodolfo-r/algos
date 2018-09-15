@@ -3,7 +3,7 @@ package sort_test
 import (
 	"testing"
 
-	"github.com/techmexdev/algos/sort"
+	"github.com/rodolfo-r/algos/sort"
 )
 
 func TestSelection(t *testing.T) {
